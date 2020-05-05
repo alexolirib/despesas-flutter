@@ -1,3 +1,6 @@
+import 'package:despesas/components/transaction_form.dart';
+import 'package:despesas/components/transaction_list.dart';
+import 'package:despesas/components/transaction_user.dart';
 import 'package:despesas/models/transaction.dart';
 import 'package:flutter/material.dart';
 
@@ -11,21 +14,14 @@ class ExpensesApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  final _transaction = [
-    Transaction(
-      id: 't1',
-      title: 'Novo tênis de corrida',
-      value: 310.76,
-      date: DateTime.now()
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Conta de luz',
-      value: 215.10, 
-      date: DateTime.now()
-    ),
-  ];
 
+  // String title;
+  // String value;
+
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +29,6 @@ class MyHomePage extends StatelessWidget {
         title: Text('Despesas Pessoais'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Container(
@@ -44,22 +39,7 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5
             )
           ),
-          Column(
-            children: _transaction.map((tr) {
-                return Card(
-                  child: Row(children: <Widget>[
-                      Container(
-                        child: Text(tr.value.toString()) ,
-                      ),
-                      Column(children: <Widget>[
-                        Text(tr.title),
-                        Text(tr.date.toString())
-                      ],)
-                    ],
-                  )
-                );
-              }).toList()            
-          )
+          TransactionUser()
         ],
       ),
     );
